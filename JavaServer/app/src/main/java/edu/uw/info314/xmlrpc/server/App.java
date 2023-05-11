@@ -34,7 +34,6 @@ public class App {
 
         post("/RPC", (req, res) -> { 
             String body = req.body();
-            LOG.info(body);
             Call call = new Call();
             String faultString = null;
             int faultCode = -1;

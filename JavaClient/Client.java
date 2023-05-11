@@ -115,6 +115,7 @@ public class Client {
         return HttpRequest.newBuilder()
             .uri(uri)
             .header("Content-Type", "text/xml")
+            .header("User-Agent", "Vinh")
             .POST(HttpRequest.BodyPublishers.ofString(request))
             .build();
     }
@@ -124,7 +125,6 @@ public class Client {
         InputStream inputStream = new ByteArrayInputStream(responseBody.getBytes());
         DocumentBuilder builder = dbf.newDocumentBuilder();
         Document document = builder.parse(inputStream);
-        System.out.println(responseBody);
 
         if (responseBody.contains("<fault>")) {
             String faultString = "";
@@ -144,7 +144,7 @@ public class Client {
                         break;
                 }
             }
-            System.out.println("Error: \n FaultCode: " + faultCode + "\n Fault Message: " + faultString);
+            System.out.println("Error: \n  FaultCode: " + faultCode + "\n  Fault Message: " + faultString);
         } else {
             NodeList params = document.getElementsByTagName("param");
             Element valueElem = (Element) params.item(0).getFirstChild();
